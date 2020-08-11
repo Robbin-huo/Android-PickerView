@@ -15,6 +15,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.contrarywind.view.WheelView;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Build Options
@@ -111,4 +112,11 @@ public class PickerOptions {
     public WheelView.DividerType dividerType = WheelView.DividerType.FILL;//分隔线类型
     public int itemsVisibleCount = 9; //最大可见条目数
     public boolean isAlphaGradient = false; //透明度渐变
+
+    // 自定义小时的数据，数值：0-23
+    public List<Integer> hourList;
+    // 自定义分的数据，数值：0-59
+    public List<Integer> minuteList;
+    // 自定义秒的数据，数值：0-59
+    public List<Integer> secondList;
 }

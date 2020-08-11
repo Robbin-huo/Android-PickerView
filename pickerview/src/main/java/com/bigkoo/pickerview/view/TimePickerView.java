@@ -98,6 +98,10 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
             });
         }
 
+        wheelTime.setHourList(mPickerOptions.hourList);
+        wheelTime.setMinuteList(mPickerOptions.minuteList);
+        wheelTime.setSecondList(mPickerOptions.secondList);
+
         wheelTime.setLunarMode(mPickerOptions.isLunarCalendar);
 
         if (mPickerOptions.startYear != 0 && mPickerOptions.endYear != 0

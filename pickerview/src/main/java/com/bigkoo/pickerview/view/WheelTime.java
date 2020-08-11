@@ -50,6 +50,22 @@ public class WheelTime {
     private boolean isLunarCalendar = false;
     private ISelectTimeCallback mSelectChangeCallback;
 
+    private List<Integer> hourList;
+    private List<Integer> minuteList;
+    private List<Integer> secondList;
+
+    public void setHourList(List<Integer> hourList) {
+        this.hourList = hourList;
+    }
+
+    public void setMinuteList(List<Integer> minuteList) {
+        this.minuteList = minuteList;
+    }
+
+    public void setSecondList(List<Integer> secondList) {
+        this.secondList = secondList;
+    }
+
     public WheelTime(View view, boolean[] type, int gravity, int textSize) {
         super();
         this.view = view;
@@ -124,19 +140,31 @@ public class WheelTime {
         wv_day.setGravity(gravity);
 
         wv_hours = (WheelView) view.findViewById(R.id.hour);
-        wv_hours.setAdapter(new NumericWheelAdapter(0, 23));
+        if (hourList == null || hourList.isEmpty()) {
+            wv_hours.setAdapter(new NumericWheelAdapter(0, 23));
+        } else {
+            wv_hours.setAdapter(new ArrayWheelAdapter<>(hourList));
+        }
         //wv_hours.setLabel(context.getString(R.string.pickerview_hours));// 添加文字
         wv_hours.setCurrentItem(h);
         wv_hours.setGravity(gravity);
 
         wv_minutes = (WheelView) view.findViewById(R.id.min);
-        wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        if (minuteList == null || minuteList.isEmpty()) {
+            wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        } else {
+            wv_minutes.setAdapter(new ArrayWheelAdapter<>(minuteList));
+        }
         //wv_minutes.setLabel(context.getString(R.string.pickerview_minutes));// 添加文字
         wv_minutes.setCurrentItem(m);
         wv_minutes.setGravity(gravity);
 
         wv_seconds = (WheelView) view.findViewById(R.id.second);
-        wv_seconds.setAdapter(new NumericWheelAdapter(0, 59));
+        if (secondList == null || secondList.isEmpty()) {
+            wv_seconds.setAdapter(new NumericWheelAdapter(0, 59));
+        } else {
+            wv_seconds.setAdapter(new ArrayWheelAdapter<>(secondList));
+        }
         //wv_seconds.setLabel(context.getString(R.string.pickerview_minutes));// 添加文字
         wv_seconds.setCurrentItem(m);
         wv_seconds.setGravity(gravity);
@@ -357,19 +385,31 @@ public class WheelTime {
         wv_day.setGravity(gravity);
         //时
         wv_hours = (WheelView) view.findViewById(R.id.hour);
-        wv_hours.setAdapter(new NumericWheelAdapter(0, 23));
+        if (hourList == null || hourList.isEmpty()) {
+            wv_hours.setAdapter(new NumericWheelAdapter(0, 23));
+        } else {
+            wv_hours.setAdapter(new ArrayWheelAdapter<>(hourList));
+        }
 
         wv_hours.setCurrentItem(h);
         wv_hours.setGravity(gravity);
         //分
         wv_minutes = (WheelView) view.findViewById(R.id.min);
-        wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        if (minuteList == null || minuteList.isEmpty()) {
+            wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        } else {
+            wv_minutes.setAdapter(new ArrayWheelAdapter<>(minuteList));
+        }
 
         wv_minutes.setCurrentItem(m);
         wv_minutes.setGravity(gravity);
         //秒
         wv_seconds = (WheelView) view.findViewById(R.id.second);
-        wv_seconds.setAdapter(new NumericWheelAdapter(0, 59));
+        if (secondList == null || secondList.isEmpty()) {
+            wv_seconds.setAdapter(new NumericWheelAdapter(0, 59));
+        } else {
+            wv_seconds.setAdapter(new ArrayWheelAdapter<>(secondList));
+        }
 
         wv_seconds.setCurrentItem(s);
         wv_seconds.setGravity(gravity);
@@ -657,28 +697,49 @@ public class WheelTime {
                 sb.append((wv_year.getCurrentItem() + startYear)).append("-")
                         .append((wv_month.getCurrentItem() + startMonth)).append("-")
                         .append((wv_day.getCurrentItem() + startDay)).append(" ")
-                        .append(wv_hours.getCurrentItem()).append(":")
-                        .append(wv_minutes.getCurrentItem()).append(":")
-                        .append(wv_seconds.getCurrentItem());
+                        .append(getCurrentHour()).append(":")
+                        .append(getCurrentMinute()).append(":")
+                        .append(getCurrentSecond());
             } else {
                 sb.append((wv_year.getCurrentItem() + startYear)).append("-")
                         .append((wv_month.getCurrentItem() + startMonth)).append("-")
                         .append((wv_day.getCurrentItem() + 1)).append(" ")
-                        .append(wv_hours.getCurrentItem()).append(":")
-                        .append(wv_minutes.getCurrentItem()).append(":")
-                        .append(wv_seconds.getCurrentItem());
+                        .append(getCurrentHour()).append(":")
+                        .append(getCurrentMinute()).append(":")
+                        .append(getCurrentSecond());
             }
 
         } else {
             sb.append((wv_year.getCurrentItem() + startYear)).append("-")
                     .append((wv_month.getCurrentItem() + 1)).append("-")
                     .append((wv_day.getCurrentItem() + 1)).append(" ")
-                    .append(wv_hours.getCurrentItem()).append(":")
-                    .append(wv_minutes.getCurrentItem()).append(":")
-                    .append(wv_seconds.getCurrentItem());
+                    .append(getCurrentHour()).append(":")
+                    .append(getCurrentMinute()).append(":")
+                    .append(getCurrentSecond());
         }
 
         return sb.toString();
+    }
+
+    private int getCurrentHour() {
+        if (hourList == null || hourList.isEmpty()) {
+            return wv_hours.getCurrentItem();
+        }
+        return hourList.get(wv_hours.getCurrentItem());
+    }
+
+    private int getCurrentMinute() {
+        if (minuteList == null || minuteList.isEmpty()) {
+            return wv_minutes.getCurrentItem();
+        }
+        return minuteList.get(wv_minutes.getCurrentItem());
+    }
+
+    private int getCurrentSecond() {
+        if (secondList == null || secondList.isEmpty()) {
+            return wv_seconds.getCurrentItem();
+        }
+        return secondList.get(wv_seconds.getCurrentItem());
     }
 
 

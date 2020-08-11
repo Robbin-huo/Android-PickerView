@@ -13,6 +13,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.contrarywind.view.WheelView;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by xiaosongzeem on 2018/3/20.
@@ -80,6 +81,21 @@ public class TimePickerBuilder {
 
     public TimePickerBuilder setCancelColor(int textColorCancel) {
         mPickerOptions.textColorCancel = textColorCancel;
+        return this;
+    }
+
+    public TimePickerBuilder setHourList(List<Integer> hourList) {
+        mPickerOptions.hourList = hourList;
+        return this;
+    }
+
+    public TimePickerBuilder setMinuteList(List<Integer> minuteList) {
+        mPickerOptions.minuteList = minuteList;
+        return this;
+    }
+
+    public TimePickerBuilder setSecondList(List<Integer> secondList) {
+        mPickerOptions.secondList = secondList;
         return this;
     }
 
