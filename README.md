@@ -1,3 +1,33 @@
+## 基于`v4.1.9`支持自定义时分秒，实现时间范围、时间间隔效果
+<br>
+
+![](https://github.com/princekin-f/Android-PickerView/blob/master/preview/customHMS.jpeg)
+
+**实现上图效果仅需：**
+```
+.setHourList(new ArrayList<>(Arrays.asList(9, 10, 11, 12, 13, 14, 15, 16, 17, 18)))
+.setMinuteList(new ArrayList<>(Arrays.asList(0, 10, 20, 30, 40, 50)))
+```
+
+**总共添加了三个API：**
+```
+setHourList(List<Integer> hourList)  // 范围：0-23
+setMinuteList(List<Integer> minuteList)  // 范围：0-59
+setSecondList(List<Integer> secondList)  // 范围：0-59
+```
+### 把原有地址换成下面的即可，其他内容一模一样：
+```
+compile 'com.github.princekin-f:Android-PickerView:0.0.1'
+```
+**以下是原文档，向大佬致敬！**
+
+<br>
+
+---
+
+<br>
+<br>
+
 
 ## Android-PickerView
 
