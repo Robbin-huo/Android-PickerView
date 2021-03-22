@@ -387,31 +387,35 @@ public class WheelTime {
         wv_hours = (WheelView) view.findViewById(R.id.hour);
         if (hourList == null || hourList.isEmpty()) {
             wv_hours.setAdapter(new NumericWheelAdapter(0, 23));
+            wv_hours.setCurrentItem(h);
         } else {
             wv_hours.setAdapter(new ArrayWheelAdapter<>(hourList));
+            wv_hours.setCurrentItem(hourList.indexOf(h));
         }
 
-        wv_hours.setCurrentItem(h);
         wv_hours.setGravity(gravity);
         //分
         wv_minutes = (WheelView) view.findViewById(R.id.min);
         if (minuteList == null || minuteList.isEmpty()) {
             wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+            wv_minutes.setCurrentItem(m);
         } else {
             wv_minutes.setAdapter(new ArrayWheelAdapter<>(minuteList));
+            wv_minutes.setCurrentItem(minuteList.indexOf(m));
         }
 
-        wv_minutes.setCurrentItem(m);
         wv_minutes.setGravity(gravity);
         //秒
         wv_seconds = (WheelView) view.findViewById(R.id.second);
         if (secondList == null || secondList.isEmpty()) {
             wv_seconds.setAdapter(new NumericWheelAdapter(0, 59));
+            wv_seconds.setCurrentItem(s);
         } else {
             wv_seconds.setAdapter(new ArrayWheelAdapter<>(secondList));
+            wv_seconds.setCurrentItem(secondList.indexOf(s));
+
         }
 
-        wv_seconds.setCurrentItem(s);
         wv_seconds.setGravity(gravity);
 
         // 添加"年"监听
